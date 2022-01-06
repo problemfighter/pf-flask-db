@@ -1,11 +1,20 @@
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, BaseQuery, Model
 from pf_flask_db.helper.pf_db_helper import PFDBHelper
 
 
-class PFAppDatabase:
+class PFAppDatabase(SQLAlchemy):
 
-    def get_db(self):
-        return SQLAlchemy(query_class=PFDBHelper)
+    def __init__(self,
+                 app=None, use_native_unicode=True, session_options=None,
+                 metadata=None, query_class=BaseQuery, model_class=Model,
+                 engine_options=None):
+        if not query_class:
+            query_class = PFDBHelper
+        super().__init__(
+            app=app, use_native_unicode=use_native_unicode,
+            session_options=session_options, metadata=metadata,
+            query_class=query_class, engine_options=engine_options, model_class=model_class
+        )
 
 
-app_db = PFAppDatabase().get_db()
+app_db = PFAppDatabase()
