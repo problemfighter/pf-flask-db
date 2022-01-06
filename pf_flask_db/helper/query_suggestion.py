@@ -1,7 +1,7 @@
 from pf_flask_db.helper.pf_db_helper import PFDBHelper
 
 
-class QuerySuggestion(PFDBHelper):
+class Query(PFDBHelper):
 
     def all(self):
         pass
