@@ -4,7 +4,7 @@ from pf_flask_db.helper.pf_db_model import PFModel
 
 
 class BaseModel(PFModel):
-    pass
+    __abstract__ = True
 
 
 class AppModel(BaseModel):
