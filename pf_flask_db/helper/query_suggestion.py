@@ -9,10 +9,19 @@ class QuerySuggestion(PFDBHelper):
     def first(self):
         pass
 
+    def first_or_404(self, description=None):
+        pass
+
+    def paginate(self, page=None, per_page=None, error_out=True, max_per_page=None):
+        pass
+
     def count(self):
         pass
 
     def get(self, ident):
+        pass
+
+    def get_or_404(self, ident, description=None):
         pass
 
     def with_entities(self, *entities):
