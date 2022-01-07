@@ -16,5 +16,13 @@ class PFAppDatabase(SQLAlchemy):
             query_class=query_class, engine_options=engine_options, model_class=model_class
         )
 
+    def run_sql(self, sql):
+        try:
+            connection = self.engine.connect()
+            result = connection.execute(sql)
+            return result
+        except Exception as e:
+            pass
+
 
 app_db = PFAppDatabase()
