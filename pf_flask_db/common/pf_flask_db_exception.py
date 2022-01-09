@@ -15,8 +15,8 @@ class PFFlaskDBException:
 
     def get_exception(self, exception: Exception):
         if isinstance(exception, IntegrityError):
-            return PFException(self.parse_integrity_error(exception), message_type=self.EXCEPTION_TYPE)
-        return PFException(str(exception), message_type=self.EXCEPTION_TYPE)
+            return PFException(self.parse_integrity_error(exception), exception_type=self.EXCEPTION_TYPE)
+        return PFException(str(exception), exception_type=self.EXCEPTION_TYPE)
 
     @staticmethod
     def ins():
