@@ -4,7 +4,7 @@ from pf_flask_db.pf_app_database import app_db
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///pf-flask-db.sqlite"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///pf-flask-db-command.sqlite"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app_db.init_app(app)
 
@@ -16,10 +16,6 @@ class Person(AppModel):
     email = app_db.Column(app_db.String(120), nullable=False)
     age = app_db.Column(app_db.Integer)
     income = app_db.Column(app_db.Float, default=0)
-
-
-with app.app_context():
-    app_db.create_all()
 
 
 @app.route('/')

@@ -1,6 +1,5 @@
 from flask import Flask
 from pf_flask_db.pf_app_model import AppModel
-
 from pf_flask_db.pf_app_database import app_db
 
 app = Flask(__name__)
