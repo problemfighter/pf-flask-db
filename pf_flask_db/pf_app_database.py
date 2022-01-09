@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy, BaseQuery, Model
+
+from pf_flask_db.common.pf_flask_db_exception import PFFlaskDBException
 from pf_flask_db.helper.pf_db_helper import PFDBHelper
 
 
@@ -19,10 +21,9 @@ class PFAppDatabase(SQLAlchemy):
     def run_sql(self, sql):
         try:
             connection = self.engine.connect()
-            result = connection.execute(sql)
-            return result
+            return connection.execute(sql)
         except Exception as e:
-            pass
+            raise PFFlaskDBException.ins().get_exception(e)
 
 
 app_db = PFAppDatabase()

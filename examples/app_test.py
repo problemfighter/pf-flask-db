@@ -65,10 +65,10 @@ def list():
 
 @app.route('/create-bulk')
 def create_bulk():
-    person_list = []
     total_record = 20
+    person = Person(first_name="Flask", last_name="DB", email="flask-db@email.loc")
     for index in range(total_record):
-        person_list.append(
+        person.add(
             Person(
                 first_name="First Name " + str(index),
                 last_name="Last Name " + str(index),
@@ -76,8 +76,7 @@ def create_bulk():
                 age=1 * index,
                 income=100 * index)
         )
-    app_db.session.add_all(person_list)
-    app_db.session.commit()
+    person.save()
     response = str(total_record) + " Records successfully Inserted"
     return response
 
