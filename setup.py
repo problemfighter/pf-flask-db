@@ -9,12 +9,15 @@ env = os.environ.get('dev')
 
 
 def get_dependencies():
-    dependency = []
+    dependency = [
+        'Flask',
+        'Flask-SQLAlchemy'
+    ]
 
     if env and env == "dev":
         return dependency
 
-    return dependency + []
+    return dependency + ["PF-PY-Common"]
 
 
 setup(
@@ -33,12 +36,8 @@ setup(
     platforms='any',
     install_requires=get_dependencies(),
     classifiers=[
-        'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
-        'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-        'Topic :: Software Development :: Libraries :: Python Modules'
     ]
 )
