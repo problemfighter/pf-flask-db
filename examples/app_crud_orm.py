@@ -10,7 +10,6 @@ app_db.init_app(app)
 
 
 class Person(AppModel):
-    id = app_db.Column(app_db.Integer, primary_key=True)
     first_name = app_db.Column(app_db.String(150), nullable=False)
     last_name = app_db.Column(app_db.String(150))
     email = app_db.Column(app_db.String(120), nullable=False)
