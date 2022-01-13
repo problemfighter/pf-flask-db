@@ -7,10 +7,10 @@ class PFFlaskDBException:
 
     def parse_integrity_error(self, exception: IntegrityError):
         try:
-            if exception.orig and exception.orig.args and exception.orig.args[1]:
-                return str(exception.orig.args[1])
-        except:
-            return "Integrity Error"
+            if exception.orig and exception.orig.args and len(exception.orig.args) >= 1:
+                return str(exception.orig.args[0])
+        except Exception as e:
+            return "Integrity Error: " + str(e)
         return str(exception.orig)
 
     def get_exception(self, exception: Exception):
