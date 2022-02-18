@@ -8,10 +8,14 @@ class BaseModel(PFModel):
     __abstract__ = True
 
 
-class AppModel(BaseModel):
+class RelationalModel(BaseModel):
     __abstract__ = True
     id = app_db.Column("id", app_db.BigInteger().with_variant(Integer, "sqlite"), primary_key=True)
     created = app_db.Column("created", app_db.DateTime, default=app_db.func.now())
     updated = app_db.Column("updated", app_db.DateTime, default=app_db.func.now(), onupdate=app_db.func.now())
+
+
+class AppModel(RelationalModel):
+    __abstract__ = True
     isDeleted = app_db.Column("is_deleted", app_db.Boolean, default=False)
     uuid = app_db.Column("uuid", app_db.String(50), default=PyCommon.uuid())
