@@ -10,10 +10,16 @@ class PFModel(app_db.Model):
 
     def save(self):
         try:
+            self.before_save()
             app_db.session.add(self)
             if self._model_list:
+                for model in self._model_list:
+                    model.before_save()
                 app_db.session.add_all(self._model_list)
             app_db.session.commit()
+            self.after_save()
+            for model in self._model_list:
+                model.after_save()
         except Exception as e:
             raise PFFlaskDBException.ins().get_exception(e)
 
@@ -31,3 +37,9 @@ class PFModel(app_db.Model):
     def add_all(self, models: list):
         self._model_list = models
         return self
+
+    def before_save(self):
+        pass
+
+    def after_save(self):
+        pass
