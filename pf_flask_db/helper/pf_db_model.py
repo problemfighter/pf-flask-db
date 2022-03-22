@@ -20,6 +20,7 @@ class PFModel(app_db.Model):
             self.after_save()
             for model in self._model_list:
                 model.after_save()
+            self._model_list.clear()
         except Exception as e:
             raise PFFlaskDBException.ins().get_exception(e)
 
