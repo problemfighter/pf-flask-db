@@ -39,6 +39,14 @@ class PFModel(app_db.Model):
         self._model_list = models
         return self
 
+    @staticmethod
+    def save_all(models: list):
+        if models:
+            model = models.pop(0)
+            if isinstance(model, PFModel):
+                model.add_all(models)
+                model.save()
+
     def before_save(self):
         pass
 
