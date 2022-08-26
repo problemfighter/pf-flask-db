@@ -23,3 +23,7 @@ class AppModel(RelationalModel):
     def before_save(self):
         if not self.uuid:
             self.uuid = PyCommon.uuid()
+
+
+class ABCModel(object):
+    __use_it__ = "only_for_structural_model"
