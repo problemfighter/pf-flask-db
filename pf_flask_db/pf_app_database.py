@@ -8,13 +8,13 @@ from pf_flask_db.helper.pf_db_helper import PFDBHelper
 class PFAppDatabase(SQLAlchemy):
 
     def __init__(self,
-                 app=None, use_native_unicode=True, session_options=None,
+                 app=None, session_options=None,
                  metadata=None, query_class=BaseQuery, model_class=Model,
                  engine_options=None):
         if not query_class:
             query_class = PFDBHelper
         super().__init__(
-            app=app, use_native_unicode=use_native_unicode,
+            app=app,
             session_options=session_options, metadata=metadata,
             query_class=query_class, engine_options=engine_options, model_class=model_class
         )
