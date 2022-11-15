@@ -9,20 +9,8 @@ class PFModel(app_db.Model):
     _model_list = []
 
     def save(self):
-        try:
-            self.before_save()
-            app_db.session.add(self)
-            if self._model_list:
-                for model in self._model_list:
-                    model.before_save()
-                app_db.session.add_all(self._model_list)
-            app_db.session.commit()
-            self.after_save()
-            for model in self._model_list:
-                model.after_save()
-            self._model_list.clear()
-        except Exception as e:
-            raise PFFlaskDBException.ins().get_exception(e)
+        self.bulk_save(self._model_list)
+        self._model_list.clear()
 
     def delete(self):
         try:
@@ -44,8 +32,22 @@ class PFModel(app_db.Model):
         if models:
             model = models.pop(0)
             if isinstance(model, PFModel):
-                model.add_all(models)
-                model.save()
+                model.bulk_save(models)
+
+    def bulk_save(self, models: list):
+        try:
+            self.before_save()
+            app_db.session.add(self)
+            if models:
+                for model in models:
+                    model.before_save()
+                app_db.session.add_all(models)
+            app_db.session.commit()
+            self.after_save()
+            for model in models:
+                model.after_save()
+        except Exception as e:
+            raise PFFlaskDBException.ins().get_exception(e)
 
     def before_save(self):
         pass
