@@ -33,6 +33,7 @@ class PFModel(app_db.Model):
             model = models.pop(0)
             if isinstance(model, PFModel):
                 model.bulk_save(models)
+            models.append(model)
 
     def bulk_save(self, models: list):
         try:
